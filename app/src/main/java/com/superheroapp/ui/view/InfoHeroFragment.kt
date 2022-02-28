@@ -26,6 +26,7 @@ class InfoHeroFragment : Fragment() {
         arguments?.let{
             hero = it.getParcelable("idSuper")!!
         }
+        infoHeroViewModel.setSelectedSuperHero(hero)
 
     }
 
@@ -47,23 +48,26 @@ class InfoHeroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUiInfoHero(hero)
+        setUiInfoHero()
 
     }
 
-    fun setUiInfoHero(superHero: SuperHero)
+    fun setUiInfoHero()
     {
+        infoHeroViewModel.getSelectedSuperHero().observe(this,{ currentHero ->
+            with(binding){
+                tvNameSuperHero.text = currentHero.heroName
+                tvComics.text = currentHero.apariciones
+                tvDesciption.text = currentHero.descripcion
+                Picasso.get()
+                    .load(currentHero.image)
+                    .into(imgSuperHero)
+
+            }
+        })
 
 
-        with(binding){
-            tvNameSuperHero.text = superHero.heroName
-            tvComics.text = superHero.apariciones
-            tvDesciption.text = superHero.descripcion
-            Picasso.get()
-                .load(superHero.image)
-                .into(imgSuperHero)
 
-        }
 
     }
 

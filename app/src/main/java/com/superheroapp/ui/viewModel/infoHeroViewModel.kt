@@ -24,6 +24,12 @@ class infoHeroViewModel(): ViewModel() {
     fun setSelectedId(id: Int){
         idSelected.value = id
     }
+    fun getSelectedSuperHero(): LiveData<SuperHero> {
+        return superHeroModel
+    }
+    fun setSelectedSuperHero(superHero: SuperHero){
+        superHeroModel.value = superHero
+    }
 
 
 
